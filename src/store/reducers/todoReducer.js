@@ -1,3 +1,6 @@
+import {useMemo} from "react";
+import {useDispatch} from "react-redux"
+
 const initialState = {
   loading: false,
   todos: [],
@@ -28,4 +31,19 @@ export function todoReducer(state = initialState, action = {}) {
     default:
       return state;
   }
+}
+
+const addTodoAction = todo =>({type:ADD_TODO, payload: todo});
+const setLoadingAction = todo =>({type:SET_LOADING, payload: todo});
+
+
+const buildHandlers = dispatch => ({
+  addTodo: todo => dispatch(addTodoAction(todo)),
+  setLoading: loading => dispatch(setLoadingAction(loading))
+})
+
+export function useTodosHandlers(){
+  const dispatch = useDispatch();
+  const handlers = useMemo(()=> buildHandlers(dispatch),[]);
+  return handlers;
 }

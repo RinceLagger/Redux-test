@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-
+//import { useDispatch } from "react-redux";
+import {useTodosHandlers} from "../../store/reducers/todoReducer"
 const styles = {
   form: {
     display: "flex",
@@ -13,7 +13,8 @@ const styles = {
 };
 
 function CreateTodo() {
-  const dispatch = useDispatch();
+  ////const dispatch = useDispatch();
+  const{addTodo} = useTodosHandlers();
   const [todo, setTodo] = React.useState("");
 
   const handleChange = ({ target }) => {
@@ -22,10 +23,11 @@ function CreateTodo() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch({
-      type: "ADD_TODO",
-      payload: todo,
-    });
+    addTodo(todo);
+    // dispatch({
+    //   type: "ADD_TODO",
+    //   payload: todo,
+    // });
   };
 
   return (
