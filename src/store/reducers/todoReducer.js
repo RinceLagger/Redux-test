@@ -44,6 +44,6 @@ const buildHandlers = dispatch => ({
 
 export function useTodosHandlers(){
   const dispatch = useDispatch();
-  const handlers = useMemo(()=> buildHandlers(dispatch),[]);
+  const handlers = useMemo(()=> buildHandlers(dispatch),[dispatch]);
   return handlers;
 }
